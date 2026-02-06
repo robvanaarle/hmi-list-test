@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Page - Dynamic Image Addition</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            text-align: center;
+        }
+        #image-container {
+            margin-top: 30px;
+            min-height: 300px;
+            border: 2px dashed #ccc;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        #status {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <h1>Test Page - Dynamic Image Addition</h1>
+    <p id="status">Image will appear in <span id="countdown">3</span> seconds...</p>
+    <div id="image-container">
+        <p>Waiting for image...</p>
+    </div>
+
+    <script>
+        // Countdown display
+        let countdown = 3;
+        const countdownElement = document.getElementById('countdown');
+        const statusElement = document.getElementById('status');
+        
+        const countdownInterval = setInterval(() => {
+            countdown--;
+            if (countdown > 0) {
+                countdownElement.textContent = countdown;
+            } else {
+                clearInterval(countdownInterval);
+            }
+        }, 1000);
+
+        // Add image after 3 seconds
+        setTimeout(() => {
+            const container = document.getElementById('image-container');
+            container.innerHTML = ''; // Clear the waiting message
+            
+            const img = document.createElement('img');
+            img.src = 'https://picsum.photos/200/300';
+            img.alt = 'Dynamically added image';
+            
+            container.appendChild(img);
+            statusElement.textContent = 'Image loaded successfully!';
+            statusElement.style.color = '#4CAF50';
+        }, 3000);
+    </script>
+</body>
+</html>
